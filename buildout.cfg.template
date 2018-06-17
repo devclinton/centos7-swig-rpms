@@ -1,0 +1,31 @@
+[buildout]
+parts =
+    opt
+    swig-#MAJOR_VERSION#-build
+
+swig-buildout-root = ${buildout:directory}/src
+find-links = ${buildout:swig-buildout-root}
+eggs-directory = eggs
+
+[opt]
+recipe = plone.recipe.command
+location = /usr/local
+command =
+    mkdir -p ${opt:location} && mkdir -p ${opt:location}/bin && mkdir -p ${opt:location}/man/man1
+update-command = ${opt:command}
+stop-on-error = yes
+
+[swig-#MAJOR_VERSION#-build]
+recipe = collective.recipe.cmmi
+dependencies = ${opt:recipe}
+executable = /tmp/installdir${opt:location}/bin/swig
+url = http://prdownloads.sourceforge.net/swig/swig-#VERSION#.tar.gz
+#md5sum = 7c825b747d25c11e669e99b912398585
+extra_options =
+    --with-r
+    --with-python=python
+    --with-python3=python3.5
+    --with-ruby
+    --with-javascript
+    --prefix=${opt:location}
+make-options = DESTDIR=/tmp/installdir
