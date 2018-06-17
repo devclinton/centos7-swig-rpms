@@ -23,3 +23,6 @@ jobs:
       - run:
           name: build rpm
           command: make
+
+      - store_artifacts:
+          path: ~/repo/swig-3.0.12-1.el7.x86_64.rpm
