@@ -2,6 +2,8 @@ jobs:
   build:
     docker:
       - image: buildpack-deps:trusty
-    working_directory: ~/my-app
+    branches:
+      only:
+        - master
     steps:
       - run: make
