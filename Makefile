@@ -12,9 +12,6 @@ $(OUTPUT): Dockerfile
 	docker build --build-arg VERSION=$(VERSION) \
 		--build-arg BUILDOUT_CFG=buildout.$(MAJOR_VERSION).cfg \
 		--build-arg MAJOR_VERSION=$(MAJOR_VERSION) \
-		--build-arg HTTP_PROXY=http://172.17.0.8:3128 \
-		--build-arg HTTPS_PROXY=http://172.17.0.8:3128 \
-		--build-arg FTP_PROXY=http://172.17.0.8:3128 \
 		--rm -t swig:$(VERSION)-centos -f Dockerfile .
 	ID=$$(docker create swig:$(VERSION)-centos) \
 	&& docker cp $$ID:/build/$(TARGET)-1.x86_64.rpm $(OUTPUT) \
