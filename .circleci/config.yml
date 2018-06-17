@@ -1,3 +1,4 @@
+version: 2
 jobs:
   build:
     docker:
@@ -5,5 +6,10 @@ jobs:
     branches:
       only:
         - master
+    working_directory: ~/repo
+
     steps:
-      - run: make
+      - checkout
+      - run:
+          name: build rpm
+          command: make
